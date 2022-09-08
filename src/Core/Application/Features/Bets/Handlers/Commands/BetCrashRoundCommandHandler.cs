@@ -26,7 +26,6 @@ namespace Smashup.Application.Features.Rounds.Scraping.Handlers.Commands
     public async Task<BetCrashRoundCommandResponse> Handle(BetCrashRoundCommand request, CancellationToken cancellationToken)
     {
       var betDomainDTO = this._mapper.Map<Smashup.Domain.DTOs.Bets.CreateBetDTO>(request.betDTO);
-
       var betDomainOrError = Bet.Create(betDomainDTO);
 
       if (betDomainOrError.IsLeft())

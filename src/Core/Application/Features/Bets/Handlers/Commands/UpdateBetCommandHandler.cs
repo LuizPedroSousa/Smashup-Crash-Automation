@@ -19,10 +19,9 @@ namespace Smashup.Application.Features.Bets.Handlers.Commands
 
     public async Task<Bet> Handle(UpdateBetCommand request, CancellationToken cancellationToken)
     {
-
       var bet = await this._betRepository.FindOneById(request.betDTO.id);
-
       var betUpdated = this._mapper.Map(request.betDTO, bet);
+
       await this._betRepository.UpdateOne(betUpdated);
 
       return betUpdated;
