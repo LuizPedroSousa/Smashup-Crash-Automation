@@ -44,12 +44,16 @@ namespace Smashup.Domain.Modules.Crashs
       {
         this.patternCount += 1;
       }
+      else
+      {
+        this.Reset("Quebra de cores");
+      }
     }
 
     public void AddBet(Bet bet)
     {
       this.bets.Add(bet);
-      this.Reset();
+      this.Reset("Aposta realizada");
     }
 
 
@@ -78,12 +82,14 @@ namespace Smashup.Domain.Modules.Crashs
         return true;
       }
 
-      return true;
+      return false;
     }
 
-    public void Reset()
+    public void Reset(string reason)
     {
       this.patternCount = 0;
+      Console.ForegroundColor = ConsoleColor.Yellow;
+      Console.WriteLine($"⚠️ Contagem resetada - {reason}");
     }
 
     public bool IsEndGame()

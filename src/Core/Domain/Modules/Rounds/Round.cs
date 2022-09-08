@@ -25,7 +25,7 @@ namespace Smashup.Domain.Modules.Rounds
     {
       if (!Round.IsValid(dto.rounds, dto.color.name))
       {
-        return new InvalidRoundException("Quebra de cores");
+        return new InvalidRoundException("Cor inválida");
       }
 
       var color = new Color(dto.color.name, dto.color.meta);
@@ -40,21 +40,7 @@ namespace Smashup.Domain.Modules.Rounds
         return false;
       }
 
-      var result = true;
-
-      if (rounds.Count > 0)
-      {
-        foreach (var round in rounds)
-        {
-          if (round.color.name != colorName)
-          {
-            result = false;
-            break;
-          }
-        }
-      }
-
-      return result;
+      return true;
     }
   }
 }
