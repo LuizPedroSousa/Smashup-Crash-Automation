@@ -19,7 +19,8 @@ namespace Smashup.Application.Features.Crashs.Handlers.Queries
       {
         target = "#app > div.error-section > span",
         isIframe = true,
-        maxSelectorTimeout = 2000,
+        maxSelectorTimeout = 1000,
+        logError = false
       });
 
       if (!string.IsNullOrEmpty(error))

@@ -175,7 +175,8 @@ public class PuppeteerHeadlessProvider : HeadlessProvider
     }
     catch (Exception exception)
     {
-      Console.WriteLine(exception.Message);
+      if (data.logError)
+        Console.WriteLine($"fill input error - {exception.Message}");
       return false;
     }
 
@@ -231,7 +232,8 @@ public class PuppeteerHeadlessProvider : HeadlessProvider
     }
     catch (Exception exception)
     {
-      Console.WriteLine(exception.Message);
+      if (data.logError)
+        Console.WriteLine($"Click error - {exception.Message}");
 
       return false;
     }
@@ -283,8 +285,11 @@ public class PuppeteerHeadlessProvider : HeadlessProvider
       return true;
 
     }
-    catch
+    catch (Exception exception)
+
     {
+      if (data.logError)
+        Console.WriteLine($"getting element error - {exception.Message}");
       return false;
     }
   }
@@ -302,14 +307,14 @@ public class PuppeteerHeadlessProvider : HeadlessProvider
         frame = await getFrame(data.maxSelectorTimeout);
         await frame.WaitForSelectorAsync(data.target, new WaitForSelectorOptions
         {
-          Timeout = data.timeout
+          Timeout = data.maxSelectorTimeout,
         });
       }
       else
       {
         await page.WaitForSelectorAsync(data.target, new WaitForSelectorOptions
         {
-          Timeout = data.timeout
+          Timeout = data.maxSelectorTimeout
         });
       }
 
@@ -332,7 +337,8 @@ public class PuppeteerHeadlessProvider : HeadlessProvider
     }
     catch (Exception exception)
     {
-      Console.WriteLine($"getting text error - {exception.Message}");
+      if (data.logError)
+        Console.WriteLine($"getting text error - {exception.Message}");
       return "";
     }
   }
@@ -381,7 +387,8 @@ public class PuppeteerHeadlessProvider : HeadlessProvider
     }
     catch (Exception exception)
     {
-      Console.WriteLine($"Getting attribute - {exception.Message}");
+      if (data.logError)
+        Console.WriteLine($"Getting attribute - {exception.Message}");
       return "";
     }
 
